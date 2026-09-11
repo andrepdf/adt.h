@@ -26,7 +26,7 @@ struct List {
             List* _1;
         } Cons;
     } as;
-}
+};
 
 static inline List Nil() {
     return (List){
@@ -37,7 +37,7 @@ static inline List Nil() {
 static inline List Cons(int _0, List* _1) {
     return (List){
         .tag = _Cons,
-        .as.Cons._0 = _0
+        .as.Cons._0 = _0,
         .as.Cons._1 = _1
     };
 }
