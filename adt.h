@@ -101,6 +101,56 @@
 #define ADT_CONS(d, ...) \
     ADT_CAT(ADT_CONS, ADT_NARG(__VA_ARGS__))(d, __VA_ARGS__)
 
+#define ADT_LOCAL_0(...)
+#define ADT_LOCAL_1(x, c, a0)                                           \
+    typeof(x->as.c._0) a0 = x->as.c._0;
+#define ADT_LOCAL_2(x, c, a0, a1)                                       \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1;
+#define ADT_LOCAL_3(x, c, a0, a1, a2)                                   \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2;
+#define ADT_LOCAL_4(x, c, a0, a1, a2, a3)                               \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2; typeof(x->as.c._3) a3 = x->as.c._3;
+#define ADT_LOCAL_5(x, c, a0, a1, a2, a3, a4)                           \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2; typeof(x->as.c._3) a3 = x->as.c._3; \
+    typeof(x->as.c._4) a4 = x->as.c._4;
+#define ADT_LOCAL_6(x, c, a0, a1, a2, a3, a4, a5)                       \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2; typeof(x->as.c._3) a3 = x->as.c._3; \
+    typeof(x->as.c._4) a4 = x->as.c._4; typeof(x->as.c._5) a5 = x->as.c._5;
+#define ADT_LOCAL_7(x, c, a0, a1, a2, a3, a4, a5, a6)                   \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2; typeof(x->as.c._3) a3 = x->as.c._3; \
+    typeof(x->as.c._4) a4 = x->as.c._4; typeof(x->as.c._5) a5 = x->as.c._5; \
+    typeof(x->as.c._6) a6 = x->as.c._6;
+#define ADT_LOCAL_8(x, c, a0, a1, a2, a3, a4, a5, a6, a7)               \
+    typeof(x->as.c._0) a0 = x->as.c._0; typeof(x->as.c._1) a1 = x->as.c._1; \
+    typeof(x->as.c._2) a2 = x->as.c._2; typeof(x->as.c._3) a3 = x->as.c._3; \
+    typeof(x->as.c._4) a4 = x->as.c._4; typeof(x->as.c._5) a5 = x->as.c._5; \
+    typeof(x->as.c._6) a6 = x->as.c._6; typeof(x->as.c._7) a7 = x->as.c._7;
+#define ADT_LOCAL(x, c, ...) \
+    ADT_CAT(ADT_LOCAL, ADT_NARG(__VA_ARGS__))(x, c, __VA_ARGS__)
+
+#define ADT_MATCH_2(x, a, b)                   \
+    case ADT_CAT(,ADT_HEAD(a)): {              \
+        ADT_LOCAL(x, ADT_HEAD(a), ADT_TAIL(a)) \
+        b                                      \
+        break;                                 \
+    }
+#define ADT_MATCH_4(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_2(x, __VA_ARGS__)
+#define ADT_MATCH_6(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_4(x, __VA_ARGS__)
+#define ADT_MATCH_8(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_6(x, __VA_ARGS__)
+#define ADT_MATCH_10(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_8(x, __VA_ARGS__)
+#define ADT_MATCH_12(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_10(x, __VA_ARGS__)
+#define ADT_MATCH_14(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_12(x, __VA_ARGS__)
+#define ADT_MATCH_16(x, a, b, ...) ADT_MATCH_2(x, a, b) ADT_MATCH_14(x, __VA_ARGS__)
+#define ADT_MATCH(x, ...) \
+    ADT_CAT(ADT_MATCH, ADT_NARG(__VA_ARGS__))(x, __VA_ARGS__)
+
+/*----------------------------------------------------------------------------*/
+
 #define datadef(d, ...)                \
     typedef struct d d;                \
     struct d {                         \
@@ -112,5 +162,10 @@
         } as;                          \
     };                                 \
     ADT_CONS(d, __VA_ARGS__)
+
+#define match(x, ...)             \
+    switch (x->tag) {             \
+        ADT_MATCH(x, __VA_ARGS__) \
+    }
 
 #endif
