@@ -11,7 +11,7 @@
 #define _ADT_NARG(_0, _1, _2, _3, _4, _5, _6, _7, _8, n, ...) n
 #define ADT_NARG(...) _ADT_NARG(_, ##__VA_ARGS__, 8, 7, 6, 5, 4, 3, 2, 1, 0)
 
-#define ADT_TAGS_1(d, xs) ADT_CAT(d, ADT_HEAD(xs))
+#define ADT_TAGS_1(d, xs) ADT_CAT(, ADT_HEAD(xs))
 #define ADT_TAGS_2(d, xs, ...) ADT_TAGS_1(d, xs), ADT_TAGS_1(d, __VA_ARGS__)
 #define ADT_TAGS_3(d, xs, ...) ADT_TAGS_1(d, xs), ADT_TAGS_2(d, __VA_ARGS__)
 #define ADT_TAGS_4(d, xs, ...) ADT_TAGS_1(d, xs), ADT_TAGS_3(d, __VA_ARGS__)
@@ -57,7 +57,7 @@
 #define ADT_PARAMS(...) \
     ADT_CAT(ADT_PARAMS, ADT_NARG(__VA_ARGS__))(__VA_ARGS__)
 
-#define ADT_BINDS_0(d, c) .tag = d##_##c
+#define ADT_BINDS_0(d, c) .tag = _##c
 #define ADT_BINDS_1(d, c) ADT_BINDS_0(d, c), .as.c._0 = _0
 #define ADT_BINDS_2(d, c) ADT_BINDS_1(d, c), .as.c._1 = _1
 #define ADT_BINDS_3(d, c) ADT_BINDS_2(d, c), .as.c._2 = _2
@@ -86,12 +86,11 @@
     ADT_CAT(ADT_CONS, ADT_NARG(__VA_ARGS__))(d, __VA_ARGS__)
 
 #define datadef(d, ...)                \
-    typedef enum {                     \
-        ADT_TAGS(d, __VA_ARGS__)       \
-    } _##d##_Tag;                      \
     typedef struct d d;                \
     struct d {                         \
-        _##d##_Tag tag;                \
+        enum {                         \
+            ADT_TAGS(d, __VA_ARGS__)   \
+        } tag;                         \
         union {                        \
             ADT_FIELDS(__VA_ARGS__)    \
         } as;                          \
