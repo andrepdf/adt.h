@@ -89,12 +89,13 @@
     typedef enum {                     \
         ADT_TAGS(d, __VA_ARGS__)       \
     } _##d##_Tag;                      \
-    typedef struct {                   \
+    typedef struct d d;                \
+    struct d {                         \
         _##d##_Tag tag;                \
         union {                        \
             ADT_FIELDS(__VA_ARGS__)    \
         } as;                          \
-    } d;                               \
+    };                                 \
     ADT_CONS(d, __VA_ARGS__)
 
 #endif
