@@ -23,14 +23,22 @@
     ADT_CAT(ADT_TAGS, ADT_NARG(__VA_ARGS__))(d, __VA_ARGS__)
 
 #define ADT_BODY_0(...)
-#define ADT_BODY_1(t) t _0;
-#define ADT_BODY_2(t, ...) ADT_BODY_1(__VA_ARGS__) t _1;
-#define ADT_BODY_3(t, ...) ADT_BODY_2(__VA_ARGS__) t _2;
-#define ADT_BODY_4(t, ...) ADT_BODY_3(__VA_ARGS__) t _3;
-#define ADT_BODY_5(t, ...) ADT_BODY_4(__VA_ARGS__) t _4;
-#define ADT_BODY_6(t, ...) ADT_BODY_5(__VA_ARGS__) t _5;
-#define ADT_BODY_7(t, ...) ADT_BODY_6(__VA_ARGS__) t _6;
-#define ADT_BODY_8(t, ...) ADT_BODY_7(__VA_ARGS__) t _7;
+#define ADT_BODY_1(t0) \
+    t0 _0;
+#define ADT_BODY_2(t0, t1) \
+    t0 _0; t1 _1;
+#define ADT_BODY_3(t0, t1, t2) \
+    t0 _0; t1 _1; t2 _2;
+#define ADT_BODY_4(t0, t1, t2, t3) \
+    t0 _0; t1 _1; t2 _2; t3 _3;
+#define ADT_BODY_5(t0, t1, t2, t3, t4) \
+    t0 _0; t1 _1; t2 _2; t3 _3; t4 _4;
+#define ADT_BODY_6(t0, t1, t2, t3, t4, t5) \
+    t0 _0; t1 _1; t2 _2; t3 _3; t4 _4; t5 _5;
+#define ADT_BODY_7(t0, t1, t2, t3, t4, t5, t6) \
+    t0 _0; t1 _1; t2 _2; t3 _3; t4 _4; t5 _5; t6 _6;
+#define ADT_BODY_8(t0, t1, t2, t3, t4, t5, t6, t7) \
+    t0 _0; t1 _1; t2 _2; t3 _3; t4 _4; t5 _5; t6 _6; t7 _7;
 #define ADT_BODY(...) \
     ADT_CAT(ADT_BODY, ADT_NARG(__VA_ARGS__))(__VA_ARGS__)
 
@@ -46,14 +54,22 @@
     ADT_CAT(ADT_FIELDS, ADT_NARG(__VA_ARGS__))(__VA_ARGS__)
 
 #define ADT_PARAMS_0(...)
-#define ADT_PARAMS_1(t) t _0
-#define ADT_PARAMS_2(t, ...) ADT_PARAMS_1(__VA_ARGS__), t _1
-#define ADT_PARAMS_3(t, ...) ADT_PARAMS_2(__VA_ARGS__), t _2
-#define ADT_PARAMS_4(t, ...) ADT_PARAMS_3(__VA_ARGS__), t _3
-#define ADT_PARAMS_5(t, ...) ADT_PARAMS_4(__VA_ARGS__), t _4
-#define ADT_PARAMS_6(t, ...) ADT_PARAMS_5(__VA_ARGS__), t _5
-#define ADT_PARAMS_7(t, ...) ADT_PARAMS_6(__VA_ARGS__), t _6
-#define ADT_PARAMS_8(t, ...) ADT_PARAMS_7(__VA_ARGS__), t _7
+#define ADT_PARAMS_1(t0) \
+    t0 _0
+#define ADT_PARAMS_2(t0, t1) \
+    t0 _0, t1 _1
+#define ADT_PARAMS_3(t0, t1, t2) \
+    t0 _0, t1 _1, t2 _2
+#define ADT_PARAMS_4(t0, t1, t2, t3) \
+    t0 _0, t1 _1, t2 _2, t3 _3
+#define ADT_PARAMS_5(t0, t1, t2, t3, t4) \
+    t0 _0, t1 _1, t2 _2, t3 _3, t4 _4
+#define ADT_PARAMS_6(t0, t1, t2, t3, t4, t5) \
+    t0 _0, t1 _1, t2 _2, t3 _3, t4 _4, t5 _5
+#define ADT_PARAMS_7(t0, t1, t2, t3, t4, t5, t6) \
+    t0 _0, t1 _1, t2 _2, t3 _3, t4 _4, t5 _5, t6 _6
+#define ADT_PARAMS_8(t0, t1, t2, t3, t4, t5, t6, t7) \
+    t0 _0, t1 _1, t2 _2, t3 _3, t4 _4, t5 _5, t6 _6, t7 _7
 #define ADT_PARAMS(...) \
     ADT_CAT(ADT_PARAMS, ADT_NARG(__VA_ARGS__))(__VA_ARGS__)
 
